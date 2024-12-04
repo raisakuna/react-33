@@ -9,5 +9,6 @@ createRoot(document.getElementById("root")).render(
     <LandingPage />
     <Auth.LoginPage />
     <LandingPage />
+    {/* <Auth.ThemeToggle /> */}
   </StrictMode>
 );
