@@ -5,5 +5,5 @@ export default {
   theme: {
     extend: {},
   },
-  plugins: [flowbite.content()],
+  plugins: [flowbite.plugin(), require("flowbite/plugin")],
 };
