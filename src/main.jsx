@@ -1,13 +1,13 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import LandingPage from "./pages/landing";
-import Auth from "./pages/auth";
 import "./assets/css/main.css";
+import { Flowbite } from "flowbite-react";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <LandingPage />
-    <Auth.LoginPage />
-    {<Auth.ThemeToggle />}
+    <Flowbite>
+      <LandingPage />
+    </Flowbite>
   </StrictMode>
 );

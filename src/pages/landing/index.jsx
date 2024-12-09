@@ -2,8 +2,11 @@ import { Footer } from "flowbite-react";
 import { HomeHeader } from "../../components/headers/header.component";
 import { PageTitle } from "../../components/title/title.component";
 import { HomeFooter } from "../../components/footer/footer.component";
+import { useState } from "react";
 
 function LandingPage() {
+  let [loading, setLoading] = useState(true);
+
   return (
     <>
       {/* <HomeHeader user={{ name: "Sandesh", email: "sandesh@abc.com" }} /> */}
@@ -11,7 +14,7 @@ function LandingPage() {
 
       <div
         id="default-carousel"
-        className="relative w-full"
+        className="relative w-full z-0 "
         data-carousel="slide"
       >
         <div className="relative h-56 overflow-hidden rounded-lg md:h-96">
