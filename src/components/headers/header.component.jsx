@@ -15,12 +15,12 @@ export const HomeHeader = ({ user }) => {
               <a href="#" title="" className="">
                 <img
                   className="block w-auto h-8 dark:hidden"
-                  src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/logo-full.svg"
+                  src="/logo_light.png"
                   alt=""
                 />
                 <img
                   className="hidden w-auto h-8 dark:block"
-                  src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/logo-full-dark.svg"
+                  src="/logo_dark.png"
                   alt=""
                 />
               </a>
@@ -29,7 +29,7 @@ export const HomeHeader = ({ user }) => {
             <ul className="hidden lg:flex items-center justify-start gap-6 md:gap-8 py-3 sm:justify-center">
               <li>
                 <a
-                  href="#"
+                  href="/"
                   title=""
                   className="flex text-sm font-medium text-gray-900 hover:text-primary-700 dark:text-white dark:hover:text-primary-500"
                 >
@@ -38,20 +38,20 @@ export const HomeHeader = ({ user }) => {
               </li>
               <li className="shrink-0">
                 <a
-                  href="#"
+                  href="/about-us"
                   title=""
                   className="flex text-sm font-medium text-gray-900 hover:text-primary-700 dark:text-white dark:hover:text-primary-500"
                 >
-                  Best Sellers
+                  About Us{" "}
                 </a>
               </li>
               <li className="shrink-0">
                 <a
-                  href="#"
+                  href="/products"
                   title=""
                   className="flex text-sm font-medium text-gray-900 hover:text-primary-700 dark:text-white dark:hover:text-primary-500"
                 >
-                  Gift Ideas
+                  All Products
                 </a>
               </li>
               <li className="shrink-0">
@@ -127,7 +127,7 @@ export const HomeHeader = ({ user }) => {
               <div className="grid grid-cols-2">
                 <div>
                   <a
-                    href="#"
+                    href=""
                     className="truncate text-sm font-semibold leading-none text-gray-900 dark:text-white hover:underline"
                   >
                     Apple iPhone 15
