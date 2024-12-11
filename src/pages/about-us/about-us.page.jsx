@@ -1,10 +1,6 @@
-import { HomeFooter } from "../../components/footer/footer.component";
-import { HomeHeader } from "../../components/headers/header.component";
-
 const AboutUsPage = () => {
   return (
     <>
-      <HomeHeader />
       <section class="bg-primary-200 dark:bg-gray-900 antialiased">
         <div class="max-w-screen-xl px-4 py-8 mx-auto lg:px-6 sm:py-16 lg:py-24">
           <div class="max-w-2xl mx-auto text-center">
@@ -122,7 +118,6 @@ const AboutUsPage = () => {
           </div>
         </div>
       </section>
-      <HomeFooter />
     </>
   );
 };
