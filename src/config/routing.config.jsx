@@ -8,7 +8,8 @@ import {
 import LandingPage from "../pages/landing";
 import AboutUsPage from "../pages/about-us/about-us.page";
 import AllProductGridPage from "../pages/products/all-products.page";
-import HomePageLayout from "../pages/layout/home.layout.page";
+import HomePageLayout from "../pages/layout/home-layout.page";
+import UserLayoutPage from "../pages/layout/user-layout.page";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -29,6 +30,16 @@ const router = createBrowserRouter([
       {
         path: "*",
         element: <>Error Page</>,
+      },
+    ],
+  },
+  {
+    path: "/admin",
+    element: <UserLayoutPage role="admin" />,
+    children: [
+      {
+        index: true,
+        element: <>Admin Dashboard</>,
       },
     ],
   },
