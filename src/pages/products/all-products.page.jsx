@@ -56,34 +56,10 @@ const AllProductGridPage = () => {
                       </a>
                     </div>
                   </li>
-                  <li aria-current="page">
-                    <div className="flex items-center">
-                      <svg
-                        className="h-5 w-5 text-gray-400 rtl:rotate-180"
-                        aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          stroke="currentColor"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="m9 5 7 7-7 7"
-                        />
-                      </svg>
-                      <span className="ms-1 text-sm font-medium text-gray-500 dark:text-gray-400 md:ms-2">
-                        Electronics
-                      </span>
-                    </div>
-                  </li>
                 </ol>
               </nav>
               <h2 className="mt-3 text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">
-                Electronics
+                All Products
               </h2>
             </div>
             <div className="flex items-center space-x-4">

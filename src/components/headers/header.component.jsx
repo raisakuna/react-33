@@ -56,7 +56,7 @@ export const HomeHeader = ({ user }) => {
               </li>
               <li className="shrink-0">
                 <a
-                  href="#"
+                  href="/deals"
                   title=""
                   className="text-sm font-medium text-gray-900 hover:text-primary-700 dark:text-white dark:hover:text-primary-500"
                 >
@@ -65,11 +65,11 @@ export const HomeHeader = ({ user }) => {
               </li>
               <li className="shrink-0">
                 <a
-                  href="#"
+                  href="/privacy-policy"
                   title=""
                   className="text-sm font-medium text-gray-900 hover:text-primary-700 dark:text-white dark:hover:text-primary-500"
                 >
-                  Sell
+                  Privacy & Policy
                 </a>
               </li>
             </ul>
