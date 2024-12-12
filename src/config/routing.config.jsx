@@ -10,6 +10,8 @@ import AboutUsPage from "../pages/about-us/about-us.page";
 import AllProductGridPage from "../pages/products/all-products.page";
 import HomePageLayout from "../pages/layout/home-layout.page";
 import UserLayoutPage from "../pages/layout/user-layout.page";
+import AdminDashboardPage from "../pages/dashboard/admin-dashboard.page";
+import NotFoundPage from "../pages/errors/error-404.page";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -29,7 +31,7 @@ const router = createBrowserRouter([
       },
       {
         path: "*",
-        element: <>Error Page</>,
+        element: <NotFoundPage />,
       },
     ],
   },
@@ -39,7 +41,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <>Admin Dashboard</>,
+        element: <AdminDashboardPage />,
       },
     ],
   },
