@@ -32,7 +32,10 @@ export const HomeHeader = ({ user }) => {
                 <NavLink
                   to="/"
                   title=""
-                  className="flex text-sm font-medium text-gray-900 hover:text-primary-700 dark:text-white dark:hover:text-primary-500"
+                  className={({ isActive }) =>
+                    (isActive ? "text-green-400 dark:text-red-600" : "") +
+                    `flex text-sm font-medium text-gray-900 hover:text-primary-700 dark:text-white dark:hover:text-primary-500`
+                  }
                 >
                   Home
                 </NavLink>
@@ -506,7 +509,7 @@ export const HomeHeader = ({ user }) => {
                 <>
                   <div className="p-2 text-sm font-medium text-gray-900 dark:text-white">
                     <NavLink
-                      to="#"
+                      to="/login"
                       title=""
                       className="inline-flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600"
                     >
@@ -516,7 +519,7 @@ export const HomeHeader = ({ user }) => {
                   </div>
                   <div className="p-2 text-sm font-medium text-gray-900 dark:text-white">
                     <NavLink
-                      to="#"
+                      to="register"
                       title=""
                       className="inline-flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600"
                     >

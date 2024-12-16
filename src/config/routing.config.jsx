@@ -12,6 +12,7 @@ import HomePageLayout from "../pages/layout/home-layout.page";
 import UserLayoutPage from "../pages/layout/user-layout.page";
 import AdminDashboardPage from "../pages/dashboard/admin-dashboard.page";
 import NotFoundPage from "../pages/errors/error-404.page";
+import LoginPage from "../pages/auth/login/login.page";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -28,6 +29,14 @@ const router = createBrowserRouter([
       {
         path: "products",
         element: <AllProductGridPage />,
+      },
+      {
+        path: "login",
+        element: <LoginPage />,
+      },
+      {
+        path: "register",
+        element: <RegisterPage />,
       },
       {
         path: "*",
