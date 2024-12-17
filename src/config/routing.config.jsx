@@ -13,6 +13,7 @@ import UserLayoutPage from "../pages/layout/user-layout.page";
 import AdminDashboardPage from "../pages/dashboard/admin-dashboard.page";
 import NotFoundPage from "../pages/errors/error-404.page";
 import LoginPage from "../pages/auth/login/login.page";
+import RegisterPage from "../pages/auth/register/register.page";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <AdminDashboardPage />,
+      },
+      {
+        path: "*",
+        element: <NotFoundPage link="/" />,
       },
     ],
   },

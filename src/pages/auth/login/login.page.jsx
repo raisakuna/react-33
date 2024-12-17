@@ -5,8 +5,13 @@ import {
   InputLabel,
   TextInputField,
 } from "../../../components/form/input.component";
-
+import * as Yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 const LoginPage = () => {
+  const loginDTO = Yup.object({
+    email: Yup.string().email().required(),
+    password: Yup.string().required(),
+  });
   // Form-Handling Custom way
   // const [credentials, setCredential] = useState();
   // const inputChangeEvent = (e) => {
@@ -28,7 +33,7 @@ const LoginPage = () => {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({ resolver: yupResolver(loginDTO) });
   const submitEvent = (data) => {
     console.log(data);
   };
@@ -70,7 +75,7 @@ const LoginPage = () => {
                     control={control}
                     name={"email"}
                     type="email"
-                    errMsg={errors?.email ? "Email is required" : ""}
+                    errMsg={errors?.email?.message}
                     placeholder="Enter your email"
                   />
 
@@ -128,7 +133,7 @@ const LoginPage = () => {
                     control={control}
                     name={"password"}
                     type="password"
-                    errMsg={errors?.email ? "Password is required" : ""}
+                    errMsg={errors?.email?.message}
                     placeholder="Enter your Password!"
                   />
                 </div>
