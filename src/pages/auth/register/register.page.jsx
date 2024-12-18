@@ -8,12 +8,31 @@ import {
   FileUploadField,
 } from "../../../components/form/input.component";
 import { useForm } from "react-hook-form";
+import * as Yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 const RegisterPage = () => {
+  const userRegistrationDTO = Yup.object({
+    name: Yup.string().min(2).max(25).required(),
+    email: Yup.string().email().required(),
+    password: Yup.string().matches(
+      /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$!%*?&])[A-Za-z\d@#$!%*?&]{8,25}$/
+    ),
+    passwordConfirmation: Yup.string().oneOf([Yup.ref("password")]),
+    gender: Yup.string().matches(/^(male|female|other)$/),
+    role: Yup.string()
+      .matches(/^(customer|seller)$/)
+      .required(),
+    phone: Yup.string().required(),
+    address: Yup.string().nullable().optional().default(null),
+    image: Yup.mixed().required(),
+  });
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    resolver: yupResolver(userRegistrationDTO),
+  });
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordMatch, setPasswordMatch] = useState(true);
@@ -28,7 +47,9 @@ const RegisterPage = () => {
     setPasswordMatch(e.target.value === password);
   };
 
-  const submitEvent = (data) => {};
+  const submitEvent = (data) => {
+    console.log(data);
+  };
   return (
     <>
       <div className="flex items-center justify-center min-h-screen bg-gray-100">

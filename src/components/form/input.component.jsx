@@ -38,7 +38,9 @@ export const TextInputField = ({
 };
 
 export const RadioInputField = ({ options, name, control, errMsg = null }) => {
-  const { field } = useController({
+  const {
+    field: { onChange, value },
+  } = useController({
     control: control,
     name: name,
   });
@@ -50,7 +52,13 @@ export const RadioInputField = ({ options, name, control, errMsg = null }) => {
             id={option.value}
             type="radio"
             value={option.value}
-            {...field}
+            name={name}
+            onChange={(e) => {
+              if (e.target.checked) {
+                console.log(option.value);
+                onChange(option.value);
+              }
+            }}
             className="w-4 h-4 mx-2  text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500"
           />
           <label
@@ -66,6 +74,33 @@ export const RadioInputField = ({ options, name, control, errMsg = null }) => {
   );
 };
 
+// export const SelectOptionField = ({
+//   control,
+//   name,
+//   errMsg = null,
+//   options,
+// }) => {
+//   const { field } = useController({
+//     control: control,
+//     name: name,
+//   });
+//   return (
+//     <>
+//       <select
+//         id={name}
+//         {...field}
+//         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+//       >
+//         <option value="">--Select a role--</option>
+//         {options.map((option, index) => (
+//           <option value={option.value}>{option.label}</option>
+//         ))}
+//       </select>
+//       {errMsg && <span className="text-red-600">{errMsg}</span>}
+//     </>
+//   );
+// };
+
 export const SelectOptionField = ({
   control,
   name,
@@ -76,6 +111,7 @@ export const SelectOptionField = ({
     control: control,
     name: name,
   });
+
   return (
     <>
       <select
@@ -84,11 +120,13 @@ export const SelectOptionField = ({
         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
       >
         <option value="">--Select a role--</option>
-        {options.map((option, index) => (
-          <option value={option.value}>{option.label}</option>
+        {options.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
         ))}
       </select>
-      {errMsg && <span className="text-red-600">{errorMsg}</span>}
+      {errMsg && <span className="text-red-600">{errMsg}</span>}
     </>
   );
 };
@@ -126,19 +164,43 @@ export const FileUploadField = ({
   });
   return (
     <>
-      <input
-        onChange={(e) => {
-          if (isMultiple) {
-            onChange(object.values(e.target.file));
-          } else {
-            onChange(e.target.files["0"]);
-          }
-        }}
-        multiple={isMultiple}
-        className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
-        id={name}
-        type="file"
-      />
+      <div className="flex">
+        <div className={`${isMultiple ? "w-full" : "w-3/4"}`}>
+          <input
+            onChange={(e) => {
+              if (isMultiple) {
+                onChange(Object.values(e.target.files));
+              } else {
+                onChange(e.target.files["0"]);
+              }
+            }}
+            multiple={isMultiple}
+            className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
+            id={name}
+            type="file"
+          />
+        </div>
+      </div>
+      <div className={`${isMultiple ? "w-full" : "w-1/4"}`}>
+        {Array.isArray(value) ? (
+          <div className="flex m-2">
+            {value.map((img, inx) => (
+              <div key={inx}>
+                <img src={URL.createObjectURL(img)} alt="" />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <>
+            <img
+              className="w-full"
+              src={value ? URL.createObjectURL(value) : ""}
+              alt=""
+            />
+          </>
+        )}
+      </div>
+
       {errMsg && <span className="text-red-600">{errMsg}</span>}
     </>
   );
