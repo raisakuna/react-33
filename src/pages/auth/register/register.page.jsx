@@ -2,6 +2,10 @@ import { useState } from "react";
 import {
   InputLabel,
   TextInputField,
+  RadioInputField,
+  SelectOptionField,
+  TextAreaField,
+  FileUploadField,
 } from "../../../components/form/input.component";
 import { useForm } from "react-hook-form";
 const RegisterPage = () => {
@@ -30,45 +34,45 @@ const RegisterPage = () => {
       <div className="flex items-center justify-center min-h-screen bg-gray-100">
         <div className="w-full lg:w-1/2 p-6 my-6 bg-white rounded-lg shadow-md">
           <h2 className="mb-6 text-2xl font-bold text-center text-gray-900">
-            Register
+            Registration
           </h2>
           <form onSubmit={handleSubmit(submitEvent)}>
             {/* Name */}
-            <div class="mb-4">
+            <div className="mb-4">
               <InputLabel field={"name"} labelText={"Name"} />
               <TextInputField
                 control={control}
                 name={"name"}
-                errMsg={errors?.name?.message}
                 placeholder="Enter your name"
+                errMsg={errors?.name?.message}
               />
             </div>
 
             {/* Email */}
-            <div class="mb-4">
+            <div className="mb-4">
               <InputLabel field={"email"} labelText={"Email"} />
               <TextInputField
                 control={control}
                 type="email"
                 name={"email"}
-                errMsg={errors?.email?.message}
                 placeholder="Enter your Email"
+                errMsg={errors?.email?.message}
               />
             </div>
             {/* Password */}
-            <div class="mb-4">
-              <InputLabel field={"password"} labelText={"Password"} />
+            <div className="mb-4">
+              <InputLabel field={"password"} labelText={"Password: "} />
               <TextInputField
                 control={control}
                 type="password"
                 name={"password"}
-                errMsg={errors?.password?.message}
                 placeholder="Enter your Password"
+                errMsg={errors?.password?.message}
               />
             </div>
 
             {/* Confirm Password */}
-            <div class="mb-4">
+            <div className="mb-4">
               <InputLabel
                 field={"passwordConfirmation"}
                 labelText={"Confirm Password"}
@@ -77,112 +81,71 @@ const RegisterPage = () => {
                 control={control}
                 type="password"
                 name={"passwordConfirmation"}
-                errMsg={errors?.confirmPassword?.message}
                 placeholder="Confirm your Password"
+                errMsg={errors?.confirmPassword?.message}
               />
             </div>
 
             {/* Gender */}
-            <div>
-              <label className="block mb-2 text-sm font-medium text-gray-900">
-                Gender
-              </label>
-              <div className="flex space-x-4">
-                <div className="flex items-center">
-                  <input
-                    id="male"
-                    type="radio"
-                    value="male"
-                    name="gender"
-                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500"
-                  />
-                  <label
-                    htmlFor="male"
-                    className="ml-2 text-sm font-medium text-gray-900"
-                  >
-                    Male
-                  </label>
-                </div>
-                <div className="flex items-center">
-                  <input
-                    id="female"
-                    type="radio"
-                    value="female"
-                    name="gender"
-                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500"
-                  />
-                  <label
-                    htmlFor="female"
-                    className="ml-2 text-sm font-medium text-gray-900"
-                  >
-                    Female
-                  </label>
-                </div>
+            <div className="mb-4">
+              <InputLabel field={"gender"} labelText={"Gender: "} />
+              <div className="flex">
+                <RadioInputField
+                  options={[
+                    { label: "Male", value: "male" },
+                    { label: "Female", value: "female" },
+                    { label: "Other", value: "other" },
+                  ]}
+                  name="gender"
+                  control={control}
+                  errMsg={errors?.gender?.message}
+                />
               </div>
             </div>
-
             {/* Role */}
-            <div>
-              <label
-                htmlFor="role"
-                className="block mb-2 text-sm font-medium text-gray-900"
-              >
-                Role
-              </label>
-              <select
-                id="role"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-              >
-                <option value="">Select a role</option>
-                <option value="user">User</option>
-                <option value="admin">Admin</option>
-                <option value="moderator">Moderator</option>
-              </select>
+            <div className="mb-4">
+              <InputLabel field={"role"} labelText={"Role: "} />
+              <SelectOptionField
+                options={[
+                  { label: "Buyer", value: "customer" },
+                  { label: "Seller", value: "seller" },
+                ]}
+                control={control}
+                name={"role"}
+                errMsg={errors?.role?.message}
+              />
             </div>
 
             {/* Phone */}
-            <div>
-              <label
-                htmlFor="phone"
-                className="block mb-2 text-sm font-medium text-gray-900"
-              >
-                Phone
-              </label>
-              <input
+            <div className="mb-4">
+              <InputLabel field={"phone"} labelText={"Phone: "} />
+              <TextInputField
+                control={control}
+                name={"phone"}
                 type="tel"
-                id="phone"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                placeholder="123-456-7890"
+                errMsg={errors?.phone?.message}
               />
             </div>
 
             {/* Address */}
-            <div>
-              <label
-                htmlFor="address"
-                className="block mb-2 text-sm font-medium text-gray-900"
-              >
-                Address
-              </label>
-              <textarea
-                id="address"
-                rows={3}
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-              ></textarea>
+            <div className="mb-4">
+              <InputLabel field={"address"} labelText={"Address: "} />
+              <TextAreaField
+                name={"address"}
+                control={control}
+                errMsg={errors?.address?.message}
+              />
             </div>
 
             {/* Image Upload */}
-            <div>
-              <label
-                className="block mb-2 text-sm font-medium text-gray-900"
-                htmlFor="image"
-              >
-                Upload Image
-              </label>
-              <input
-                className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
-                id="image"
-                type="file"
-                accept="image/*"
+            <div className="mb-4">
+              <InputLabel field={"image"} labelText={"Image: "} />
+              <FileUploadField
+                name={"image"}
+                control={control}
+                errMsg={errors?.image?.message}
+                isMultiple={true}
               />
             </div>
 
