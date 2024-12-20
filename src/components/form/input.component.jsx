@@ -74,33 +74,6 @@ export const RadioInputField = ({ options, name, control, errMsg = null }) => {
   );
 };
 
-// export const SelectOptionField = ({
-//   control,
-//   name,
-//   errMsg = null,
-//   options,
-// }) => {
-//   const { field } = useController({
-//     control: control,
-//     name: name,
-//   });
-//   return (
-//     <>
-//       <select
-//         id={name}
-//         {...field}
-//         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-//       >
-//         <option value="">--Select a role--</option>
-//         {options.map((option, index) => (
-//           <option value={option.value}>{option.label}</option>
-//         ))}
-//       </select>
-//       {errMsg && <span className="text-red-600">{errMsg}</span>}
-//     </>
-//   );
-// };
-
 export const SelectOptionField = ({
   control,
   name,
