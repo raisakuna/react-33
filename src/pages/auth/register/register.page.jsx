@@ -10,6 +10,7 @@ import {
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import authSvc from "../auth.service";
 const RegisterPage = () => {
   const userRegistrationDTO = Yup.object({
     name: Yup.string().min(2).max(25).required(),
@@ -17,7 +18,7 @@ const RegisterPage = () => {
     password: Yup.string().matches(
       /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$!%*?&])[A-Za-z\d@#$!%*?&]{8,25}$/
     ),
-    passwordConfirmation: Yup.string().oneOf([Yup.ref("password")]),
+    confirmPassword: Yup.string().oneOf([Yup.ref("password")]),
     gender: Yup.string().matches(/^(male|female|other)$/),
     role: Yup.string()
       .matches(/^(customer|seller)$/)
@@ -48,7 +49,7 @@ const RegisterPage = () => {
   };
 
   const submitEvent = (data) => {
-    console.log(data);
+    authSvc.registerUser(data);
   };
   return (
     <>
@@ -95,13 +96,13 @@ const RegisterPage = () => {
             {/* Confirm Password */}
             <div className="mb-4">
               <InputLabel
-                field={"passwordConfirmation"}
+                field={"confirmPassword"}
                 labelText={"Confirm Password"}
               />
               <TextInputField
                 control={control}
                 type="password"
-                name={"passwordConfirmation"}
+                name={"confirmPassword"}
                 placeholder="Confirm your Password"
                 errMsg={errors?.confirmPassword?.message}
               />
