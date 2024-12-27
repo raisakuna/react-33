@@ -12,18 +12,33 @@ import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import authSvc from "../auth.service";
 const RegisterPage = () => {
-  const userRegistrationDTO = Yup.object({
+  const userRegisterDTO = Yup.object({
     name: Yup.string().min(2).max(25).required(),
     email: Yup.string().email().required(),
-    password: Yup.string().matches(
-      /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$!%*?&])[A-Za-z\d@#$!%*?&]{8,25}$/
-    ),
-    confirmPassword: Yup.string().oneOf([Yup.ref("password")]),
-    gender: Yup.string().matches(/^(male|female|other)$/),
+    password: Yup.string()
+      .matches(
+        /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,25}$/,
+        {
+          message:
+            "Password should contain at least one character, a number and a special character.",
+        }
+      )
+      .required(),
+    confirmPassword: Yup.string()
+      .oneOf([Yup.ref("password")])
+      .required(),
+    gender: Yup.string()
+      .matches(/^(male|female|other)$/)
+      .required(),
     role: Yup.string()
       .matches(/^(customer|seller)$/)
       .required(),
-    phone: Yup.string().required(),
+    phone: Yup.string()
+      .matches(
+        /^(?:\+977[- ]?)?(98\d{8}|97\d{8}|96\d{8}|0[1-6][- ]?\d{6,7})$/,
+        { message: "Phone number should start with 98 or .." }
+      )
+      .required(),
     address: Yup.string().nullable().optional().default(null),
     image: Yup.mixed().required(),
   });
