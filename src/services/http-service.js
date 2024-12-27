@@ -1,12 +1,15 @@
 import axiosInstance from "../config/axios.config";
 
 class HttpService {
-  config = {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
+  config = null;
+  // {auth: true}
   setConfig = (reqConfig) => {
+    this.config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    // console.log(reqConfig)
     if (reqConfig.file || reqConfig.files) {
       this.config = {
         ...this.config,
@@ -16,33 +19,89 @@ class HttpService {
         },
       };
     }
+
     if (reqConfig.auth) {
+      let token = localStorage.getItem("accessToken") || null;
+      if (!token) {
+        throw { code: 401, message: "User not loggedIn" };
+      }
+      this.config = {
+        ...this.config,
+        headers: {
+          ...this.config.headers,
+          Authorization: "Bearer " + token, // TODO: Add keys
+        },
+      };
+    }
+
+    if (reqConfig.refresh) {
+      let token = localStorage.getItem("refreshToken") || null;
+      if (!token) {
+        throw { code: 401, message: "User not loggedIn" };
+      }
+      this.config = {
+        ...this.config,
+        headers: {
+          ...this.config.headers,
+          Refresh: token, // TODO: Add keys
+        },
+      };
+    }
+
+    if (reqConfig.params) {
       this.config = {
         ...this.config,
         params: {
           ...this.config,
+          ...reqConfig.params,
         },
       };
     }
   };
 
-  getConfig = () => {};
-  getRequest = () => {};
+  // {auth: true}
+  getRequest = async (url, config = null) => {
+    try {
+      if (config) {
+        this.setConfig(config);
+      }
+      const response = await axiosInstance.get(url, this.config);
+      return response; // undefined
+    } catch (exception) {
+      console.log("getRequest", exception);
+      throw exception;
+    }
+  };
+
+  postRequest = async (url, data = {}, config = null) => {
+    try {
+      if (config) {
+        this.setConfig(config);
+      }
+      const response = await axiosInstance.post(url, data, this.config);
+      return response; // undefined
+    } catch (exception) {
+      console.log("postRequest", exception);
+      throw exception;
+    }
+  };
+
+  putRequest = async (url, data = {}, config = null) => {
+    try {
+      if (config) {
+        this.setConfig(config);
+      }
+      const response = await axiosInstance.put(url, data, this.config);
+      return response;
+    } catch (exception) {
+      console.log("putRequest", exception);
+      throw exception;
+    }
+  };
+
+  patchRequest = () => {};
+
+  deleteRequest = () => {};
 }
-
-postRequest = async (url, data = {}, config = null) => {
-  try {
-    const response = await axiosInstance.post(url, data, {});
-    return response;
-  } catch (exception) {
-    console.log("postRequest", exception);
-    throw exception;
-  }
-};
-
-patchRequest = () => {};
-
-putRequest = () => {};
-deleteRequest = () => {};
 
 export default HttpService;
